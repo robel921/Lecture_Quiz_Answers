@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Answers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h3>Lecture Quize Answers</h3>
+    <div>
+        <h3>Introduction to Servlets Quiz</h3>
+        <p>
+            1. What is the difference between a web server and a web container?<br>
+            Ans) The Webserver: Just Receive the request from the client and forward to Web container, and do the
+            Response vice versa. Web Container: Creates HTTP Request and Response for the Servlet, calls the
+            appropriate servlet service method (do Get or do Post) to service the client request. Container also gives:
+            Communication support(socket creation), Servlet life cycle management (Init(), Service() and Destroy()),
+            Multithreading support, Declarative security(thru deployment descriptor) and JSP support.<br>
+            2. What is a servlet?<br>
+            • Servlet is a technology which is used to create a web application.<br>
+            • Servlet is an API that provides many interfaces and classes including documentation.<br>
+            • Servlet is an interface that must be implemented for creating any Servlet.<br>
+            • Servlet is a class that extends the capabilities of the servers and responds to the<br>
+            incoming requests. It can respond to any requests.
+            • Servlet is a web component that is deployed on the server to create a dynamic web
+            page.<br>
+            3. How do web servers and web containers interact with servlets?<br>
+            Ans:- First, the container loads the servlet’s class: <br>• Can happen at container startup or the first
+            time the client invokes the servlet. Container creates an instance of the servlet class (using its
+            constructor) <br>• Container then invokes the init() method.st, the container loads the servlet’s class:<br> •
+            Can happen at container startup or the first time the client invokes the servlet.• Container creates
+            an instance of the servlet class (using its constructor)<br> • Container then invokes the init() method.
+            When a client request arrives at the container, container uses the URL to determine which servlet to
+            use. <br>• Container creates request and response objects<br>
+            4 Who creates request objects?
+            Ans:- The servlet container locates the servlet, creates request and response objects
+            and passes them to the servlet, and returns to the web server the response stream that
+            the servlet produces.<br>
+            5. What are the states in the servlet lifecycle?<br>
+            Ans:- The web container maintains the life cycle of a servlet instance. Let's see the life
+            cycle of the servlet:<br>
+            • Servlet class is loaded.<br>
+            • Servlet instance is created.<br>
+            • init method is invoked.• service method is invoked.<br>
+            • destroy method is invoked.<br>
+            6. Who calls init and when?<br>
+            Ans:- The web container calls the init method only once after creating the servlet instance. The ini
+            initialize the servlet. It is the life cycle method of the javax.servlet.Servlet interface. Syntax of the
+            below:<br>
+            public void init(ServletConfig config) throws ServletException<br>
+            7. Which of init, service, and doGet should you override?<br>
+            Ans:- Instead of overriding init(ServletConfig), simply override the below method and
+            it will be called by GenericServlet.init(ServletConfig config)<br>
+            Public void init() throws ServletException {<br>
+            ServletContext sc= getServletContext();
+            }<br>
+            8. In what sense are servlets multi-threaded?<br>
+            Ans:- The web container creates threads for handling the multiple requests to the Servlet.
+            Threads have many benefits over the Processes such as they share a common memory
+            area, lightweight, cost of communication between the threads are low. The advantages of
+            Servlet are as follows:<br>
+            • Better performance: because it creates a thread for each request, not process.<br>
+            • Portability: because it uses Java language.<br>
+            • Robust: JVM manages Servlets, so we don't need to worry about the memory leak,
+            garbage collection, etc.<br>
+            • Secure: because it uses java language.<br>
+            9. What are the implications of this for servlet instance variables?<br>
+            Ans:- The web container creates the instance of a servlet after loading the servlet
+            class. The servlet instance is created only once in the servlet life cycle.</p>
+    </div>
+    <div>
+        <h3>State Management Quiz</h3>
+        <p>
+            1. Can post requests be bookmarked? What are the problems?<br>
+            Ans:- No, A POST request however is not guaranteed to give the same result every
+            time when you invoke it. All request parameters are included in the request body. It
+            is not visible for the end user and not visible in the request URL.<br>
+            2. What is the purpose of request dispatching?<br>
+            The Request Dispatcher interface provides the facility of dispatching the request to
+            another resource it may be html, servlet or Jsp. This interface can also be used to
+            include the content of another resource also. It is one of the ways of servlet
+            collaboration. There are two methods defined in the Request dispatcher interface.<br>
+            • public void forward (ServletRequest request,ServletResponse response)throws
+            ServletException,java.io.IOException:Forwards a request from a servlet to another
+            resource (servlet, JSP file, or HTML file) on the server.<br>
+            • public void include e(ServletRequest request,ServletResponse response)throws
+            ServletException,java.io.IOException:Includes the content of a resource (servlet, JSP
+            page, or HTML file) in the response.<br>
+            3. What is the difference between redirect and request dispatch?
+            Using the redirect method, we can forward the request to servlet that is either in the same servlet
+            container or in other container .When we are using request dispatch method ,we can forward the request
+            only to a servlet that is in the current container.<br>
+            • The sendRedirect() method of HttpServletResponse interface can be used to redirect
+            response to another resource, it may be servlet, jsp or html file.<br>
+            • The RequestDispatcher interface provides the facility of dispatching the request to
+            another resource it may be html, servlet or jsp. This interface can also be used to
+            include the content of another resource also. It is one of the way of servlet
+            collaboration.<br>
+            4. What is an attribute ?<br>
+            Ans:- An attribute in servlet is an object that can be set, get or removed from one of the
+            following scopes: request scope, session scope, application scope
+            The servlet programmer can pass information’s from one servlet to another using attributes.
+            It is just like passing object from one class to another so that we can reuse the same object
+            again and again.<br>
+            5. What is the difference between attributes and parameters?Ans:-<br>
+            • Request parameters are the result of submitting an HTTP request
+            with a query string that specifies the name/value pairs, or of
+            submitting an HTML form that specifies the name/value pairs.
+            The name and the values are always strings.<br>
+            • Attributes are objects, and can be placed in the request, session,
+            or context objects. Because they can be any object, not just a
+            String, they are much more flexible. You can also set attributes
+            programmatically and retrieve them later. This is very useful in
+            the MVC pattern.<br>
+            6. What are dangers of using attributes?<br>
+            Ans:-<br>
+            • Not thread safe<br>
+            • Nor session attributes<br>
+            • Only request attributes thread safe<br>
+            7. What does it mean to say that http is stateless? Give an example of a
+            stateful protocol<br>
+            Ans:-
+            A stateless protocol does not require the server to retain session information or
+            status about each communicating partner for the duration of multiple requests.
+            Example of Stateful protocol:- FTP , Talent<br>
+            8. Give 5 different methods for maintaining state information (count each
+            attribute scope as one method)..<br>
+            Ans:-<br>
+            • request scope: destroyed when servlet finishes processing request<br>
+            • session scope: destroyed when user closes browser<br>
+            • application scope destroyed when Container stopped.<br>
+            • Cookies saved on browser, temporary (deleted when the browser closes)
+            permanent<br>
+            • Hidden fields on a form9. How long does a session last?<br>
+            Ans:- The default values are 1 and 100, so the garbage collector is only started in
+            only 1% of all Session start calls. That means even if the session is already timed
+            out in theory (the session data had been changed more
+            than session.gc_maxlifetime seconds ago), the session data can be used longer
+            than that. Recommend us to implement our own session timeout mechanism.<br>
+            10. What is a cookie, and how long does a cookie last?<br>
+            Ans:- There are 2 types of cookies in servlets.<br>
+            • Non-persistent cookie:- is valid for single session only. It is removed
+            each time when user closes the browser.<br>
+            • Persistent cookie :- is valid for multiple session . It is not removed
+            each time when user closes the browser. It is removed only if user
+            logout or sign out.<br>
+            11.What is the purpose of URL rewriting?<br>
+            Ans:-<br>
+            • It will always work whether cookie is disabled or not (browser
+            independent).<br>
+            • Extra form submission is not required on each pages.<br>
+            12. Why does the request attribute report ‘null’ for the maintaining state
+            demo?<br>
+            Ans:- A reasonably likely explanation is that the requests are not in the same session.
+            Maintaining a session requires cooperation from the client, which is not guaranteed to
+            be given. The most common mechanisms for associating requests with sessions are
+            cookies and URL rewriting. If the client refuses cookies and is making its requests to a
+            static URL then every request will likely be in its own session.</p>
+    </div>
+
+</body>
+
+</html>
